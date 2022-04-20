@@ -133,13 +133,17 @@ def assimilate(text, context, tag):
     # If context is all upper, either return all upper or, if context is one
     # char, just return title case.
     if len(context) == 1:
-      return text[0].upper() + text[1:]
+      return title_case(text)
     return text.upper()
   elif context.islower():
     return text.lower()
   else:
     # If not all upper or lower, probably title case.
-    return text[0].upper() + text[1:]
+    return title_case(text)
+
+
+def title_case(text):
+  return ' '.join(word[0].upper() + word[1:] for word in word_tokenize(text))
 
 
 def _main():
